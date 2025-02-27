@@ -79,7 +79,7 @@ const SupplierOrders = () => {
                           <tr key={item.id}>
                             <td>{item.name}</td>
                             <td>{item.order_item.quantity}</td>
-                            <td>${item.order_item.sold_at_price.toFixed(2)}</td>
+                            <td>${item.order_item.sold_at_price}</td>
                           </tr>
                         ))}
                       </tbody>

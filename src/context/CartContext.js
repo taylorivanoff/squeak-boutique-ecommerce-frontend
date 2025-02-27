@@ -45,7 +45,7 @@ export const CartProvider = ({ children }) => {
       value={{
         cart: cart || [],
         totalQuantity,
-        subtotal: Number(subtotal.toFixed(2)),
+        subtotal: Number(subtotal),
         addToCart: (item) => addMutation.mutate(item),
         removeFromCart: (item) => removeMutation.mutate(item),
         isPending,
