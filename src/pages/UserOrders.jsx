@@ -11,7 +11,7 @@ const UserOrders = () => {
     queryKey: ["orders"],
     queryFn: async () => {
       const response = await API.get("/orders");
-      return response.data;
+      return response.data.data;
     },
   });
 

@@ -10,7 +10,7 @@ export const ProductProvider = ({ children }) => {
 
   const fetchProducts = async () => {
     const response = await API.get("/products");
-    return response.data;
+    return response.data.data;
   };
 
   const {

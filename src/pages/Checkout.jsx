@@ -24,7 +24,7 @@ const Checkout = () => {
       })),
     };
     const response = await API.post("/checkout", orderData);
-    return response.data;
+    return response.data.data;
   };
 
   const checkoutMutation = useMutation({

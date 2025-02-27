@@ -16,7 +16,7 @@ const SupplierRegister = () => {
   const registerMutation = useMutation({
     mutationFn: async (data) => {
       const response = await API.post("/register", data);
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.data.token);
     },
     onSuccess: () => {
       navigate("/");
@@ -37,7 +37,9 @@ const SupplierRegister = () => {
       <h2>Supplier Register</h2>
 
       {registerMutation.isError && (
-        <p className="notice">{registerMutation.error.response.data.message}</p>
+        <p className="notice">
+          {registerMutation.error.response.data.data.message}
+        </p>
       )}
 
       <form onSubmit={handleSubmit}>

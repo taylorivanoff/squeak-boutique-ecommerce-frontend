@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
   // Fetch cart
   const fetchCart = async () => {
     const response = await API.get("/cart");
-    return response.data;
+    return response.data.data;
   };
 
   const {
@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
       product_id: item.id,
       quantity: 1,
     });
-    return response.data;
+    return response.data.data;
   };
 
   const addMutation = useMutation({
@@ -47,7 +47,7 @@ export const CartProvider = ({ children }) => {
       product_id: item.product_id,
       quantity: 1,
     });
-    return response.data;
+    return response.data.data;
   };
 
   const removeMutation = useMutation({

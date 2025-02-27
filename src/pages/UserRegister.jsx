@@ -18,7 +18,7 @@ const UserRegister = () => {
   const registerMutation = useMutation({
     mutationFn: async (data) => {
       const response = await API.post("/register", data);
-      login(response.data.token, response.data.user.role);
+      login(response.data.data.token, response.data.data.user.role);
     },
     onSuccess: () => navigate("/"),
   });
@@ -36,7 +36,9 @@ const UserRegister = () => {
     <div>
       <h2>Register</h2>
       {registerMutation.isError && (
-        <p className="notice">{registerMutation.error.response.data.message}</p>
+        <p className="notice">
+          {registerMutation.error.response.data.data.message}
+        </p>
       )}
       <form onSubmit={handleSubmit}>
         <p>

@@ -10,7 +10,7 @@ const SupplierOrders = () => {
     queryKey: ["supplierOrders"],
     queryFn: async () => {
       const response = await API.get("/supplier/orders");
-      return response.data;
+      return response.data.data;
     },
   });
 

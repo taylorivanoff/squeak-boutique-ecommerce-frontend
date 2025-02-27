@@ -17,7 +17,7 @@ const UserLogin = () => {
   const loginMutation = useMutation({
     mutationFn: async (data) => {
       const response = await API.post("/login", data);
-      login(response.data.data.token, response.data.data.user.role);
+      login(response.data.data.data.token, response.data.data.data.user.role);
     },
     onSuccess: () => navigate("/"),
   });
@@ -35,7 +35,9 @@ const UserLogin = () => {
     <div>
       <h2>Login</h2>
       {loginMutation.isError && (
-        <p className="notice">{loginMutation.error.response.data.message}</p>
+        <p className="notice">
+          {loginMutation.error.response.data.data.message}
+        </p>
       )}
       <form onSubmit={handleSubmit}>
         <p>
