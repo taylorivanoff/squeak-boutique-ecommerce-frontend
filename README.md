@@ -6,6 +6,10 @@ This is the frontend part of the Squeak Boutique e-commerce store, built using R
 
 [Demo](https://squeak-boutique.netlify.app/)
 
+Demo Supplier Logins:
+- fancy@ratwear.com, password
+- runway@rodent.com, password
+
 ## Features
 
 - User registration and login
