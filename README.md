@@ -4,6 +4,8 @@
 
 This is the frontend part of the Squeak Boutique e-commerce store, built using React. It provides a dynamic user interface for suppliers and customers to interact with the system.
 
+[Demo](https://squeak-boutique.netlify.app/)
+
 ## Features
 
 - User registration and login
