@@ -29,7 +29,7 @@ This is the frontend part of the Squeak Boutique e-commerce store, built using R
 1. Clone the repository:
 
     ```bash
-    git clone git@github.com:taylorivanoff/squeak-boutique-ecommerce-frontend.git
+    git clone https://github.com/taylorivanoff/squeak-boutique-ecommerce-frontend.git
     ```
 
 2. Navigate to the frontend directory:
