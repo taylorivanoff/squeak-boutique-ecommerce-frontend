@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import API from "../api/apiClient";
+import { useAuth } from "../context/AuthContext";
 
 const SupplierRegister = () => {
+  const { login } = useAuth();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +19,7 @@ const SupplierRegister = () => {
   const registerMutation = useMutation({
     mutationFn: async (data) => {
       const response = await API.post("/register", data);
-      localStorage.setItem("token", response.data.data.token);
+      login(response.data.data.token, response.data.data.user.role);
     },
     onSuccess: () => {
       navigate("/");
@@ -37,9 +40,7 @@ const SupplierRegister = () => {
       <h2>Supplier Register</h2>
 
       {registerMutation.isError && (
-        <p className="notice">
-          {registerMutation.error.response.data.data.message}
-        </p>
+        <p className="notice">{registerMutation.error.response.data.message}</p>
       )}
 
       <form onSubmit={handleSubmit}>

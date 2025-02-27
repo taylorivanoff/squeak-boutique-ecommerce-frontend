@@ -36,9 +36,7 @@ const UserRegister = () => {
     <div>
       <h2>Register</h2>
       {registerMutation.isError && (
-        <p className="notice">
-          {registerMutation.error.response.data.data.message}
-        </p>
+        <p className="notice">{registerMutation.error.response.data.message}</p>
       )}
       <form onSubmit={handleSubmit}>
         <p>

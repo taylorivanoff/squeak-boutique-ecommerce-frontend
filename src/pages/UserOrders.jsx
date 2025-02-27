@@ -4,7 +4,7 @@ import API from "../api/apiClient";
 
 const UserOrders = () => {
   const {
-    data: orders,
+    data: orders = [],
     isLoading,
     isError,
   } = useQuery({
@@ -41,7 +41,11 @@ const UserOrders = () => {
                   </tr>
                   <tr>
                     <td>Total Order Amount</td>
-                    <td>${order.total_amount}</td>
+                    <td>${order.total_amount.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Payment Method</td>
+                    <td>{order.payment_method}</td>
                   </tr>
                   <tr>
                     <td>Delivery Address</td>
@@ -62,8 +66,8 @@ const UserOrders = () => {
                   <tbody>
                     <tr key={item.id}>
                       <td>{item.name}</td>
-                      <td>{item.pivot.quantity}</td>
-                      <td>${item.pivot.price.toFixed(2)}</td>
+                      <td>{item.order_item.quantity}</td>
+                      <td>${item.order_item.sold_at_price.toFixed(2)}</td>
                     </tr>
                   </tbody>
                 ))}

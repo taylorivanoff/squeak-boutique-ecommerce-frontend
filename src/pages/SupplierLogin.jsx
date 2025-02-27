@@ -35,9 +35,7 @@ const SupplierLogin = () => {
     <div>
       <h2>Supplier Login</h2>
       {loginMutation.isError && (
-        <p className="notice">
-          {loginMutation.error.response.data.data.message}
-        </p>
+        <p className="notice">{loginMutation.error.response.data.message}</p>
       )}
       <form onSubmit={handleSubmit} method="post">
         <p>
