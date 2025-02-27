@@ -49,13 +49,17 @@ const SupplierProductForm = ({ product, onSuccess }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const data = new FormData();
+
     data.append("name", formData.name);
     data.append("price", formData.price);
     data.append("description", formData.description);
+
     if (formData.image) {
       data.append("image", formData.image);
     }
+
     mutation.mutate(data);
 
     navigate("/supplier/products");

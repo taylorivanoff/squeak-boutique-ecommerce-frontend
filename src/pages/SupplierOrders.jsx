@@ -3,7 +3,7 @@ import API from "../api/apiClient";
 
 const SupplierOrders = () => {
   const {
-    data: products,
+    data: products = [],
     isLoading,
     error,
   } = useQuery({
@@ -35,9 +35,7 @@ const SupplierOrders = () => {
             ) : (
               <>
                 {product.orders.map((order) => (
-                  <p key={order.id}>
-                    <hr />
-
+                  <div key={order.id}>
                     <strong>Order ID: {order.id}</strong>
                     <table>
                       <tbody>
@@ -76,18 +74,18 @@ const SupplierOrders = () => {
                           <th>Price</th>
                         </tr>
                       </thead>
-                      {order.items.map((item) => (
-                        <tbody>
+                      <tbody>
+                        {order.items.map((item) => (
                           <tr key={item.id}>
                             <td>{item.name}</td>
-                            <td>{item.pivot.quantity}</td>
-                            <td>${item.pivot.price.toFixed(2)}</td>
+                            <td>{item.order_item.quantity}</td>
+                            <td>${item.order_item.sold_at_price.toFixed(2)}</td>
                           </tr>
-                        </tbody>
-                      ))}
+                        ))}
+                      </tbody>
                     </table>
                     <hr />
-                  </p>
+                  </div>
                 ))}
               </>
             )}

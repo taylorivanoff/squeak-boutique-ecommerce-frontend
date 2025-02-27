@@ -9,13 +9,14 @@ const SupplierProductList = () => {
 
   const { data: products = [], refetch } = useQuery({
     queryKey: ["supplierProducts"],
-    queryFn: () => API.get("/supplier/products").then((res) => res.data),
+    queryFn: () => API.get("/supplier/products").then((res) => res.data.data),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id) => API.delete(`/supplier/products/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
+
       refetch();
     },
   });

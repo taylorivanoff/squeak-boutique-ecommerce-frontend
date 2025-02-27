@@ -31,7 +31,7 @@ const UserOrders = () => {
       ) : (
         <>
           {orders.map((order) => (
-            <p key={order.id}>
+            <div key={order.id}>
               <strong>Order ID: {order.id}</strong>
               <table>
                 <tbody>
@@ -62,18 +62,18 @@ const UserOrders = () => {
                     <th>Price</th>
                   </tr>
                 </thead>
-                {order.items.map((item) => (
-                  <tbody>
+                <tbody>
+                  {order.items.map((item) => (
                     <tr key={item.id}>
                       <td>{item.name}</td>
                       <td>{item.order_item.quantity}</td>
                       <td>${item.order_item.sold_at_price.toFixed(2)}</td>
                     </tr>
-                  </tbody>
-                ))}
+                  ))}
+                </tbody>
               </table>
               <hr />
-            </p>
+            </div>
           ))}
         </>
       )}

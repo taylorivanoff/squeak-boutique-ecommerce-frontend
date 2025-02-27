@@ -1,13 +1,10 @@
 import React, { createContext, useContext } from "react";
 import API from "../api/apiClient";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "./AuthContext";
 
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const { token, role } = useAuth();
-
   const fetchProducts = async () => {
     const response = await API.get("/products");
     return response.data.data;
