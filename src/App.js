@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CartProvider } from "./context/CartContext"; // Import your CartProvider
-import { ProductProvider } from "./context/ProductContext"; // If you're also using ProductProvider
+import { CartProvider } from "./context/CartContext";
+import { ProductProvider } from "./context/ProductContext";
 import { AuthProvider } from "./context/AuthContext";
 
 import Navbar from "./components/Navbar";

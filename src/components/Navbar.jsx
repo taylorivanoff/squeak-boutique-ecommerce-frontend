@@ -45,9 +45,9 @@ const Navbar = () => {
               </>
             )}
 
-            <a onClick={handleLogout} className="hover:underline">
+            <button onClick={handleLogout} className="hover:underline">
               Logout
-            </a>
+            </button>
           </>
         ) : (
           <>
