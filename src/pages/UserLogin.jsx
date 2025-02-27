@@ -17,7 +17,7 @@ const UserLogin = () => {
   const loginMutation = useMutation({
     mutationFn: async (data) => {
       const response = await API.post("/login", data);
-      login(response.data.token, response.data.user.role);
+      login(response.data.data.token, response.data.data.user.role);
     },
     onSuccess: () => navigate("/"),
   });
