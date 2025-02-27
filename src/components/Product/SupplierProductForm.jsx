@@ -17,11 +17,11 @@ const SupplierProductForm = ({ product, onSuccess }) => {
   const mutation = useMutation({
     mutationFn: async () => {
       if (product) {
-        return await API.post(`/products/${product.id}`, formData, {
+        return await API.post(`/supplier/products/${product.id}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
-        return await API.post("/products", formData, {
+        return await API.post("/supplier/products", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }

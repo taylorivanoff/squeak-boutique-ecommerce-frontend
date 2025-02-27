@@ -13,7 +13,7 @@ const SupplierProductList = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (productId) => API.delete(`/products/${productId}`),
+    mutationFn: (id) => API.delete(`/supplier/products/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       refetch();
