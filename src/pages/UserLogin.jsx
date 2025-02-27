@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import API from "../api/apiClient";
 import { useAuth } from "../context/AuthContext";
+import useLoginMutation from "../hooks/useLoginMutation";
 
 const UserLogin = () => {
   const navigate = useNavigate();
@@ -14,13 +13,11 @@ const UserLogin = () => {
     role: "customer",
   });
 
-  const loginMutation = useMutation({
-    mutationFn: async (data) => {
-      const response = await API.post("/login", data);
-      login(response.data.data.token, response.data.data.user.role);
-    },
-    onSuccess: () => navigate("/"),
-  });
+  const onSuccess = () => {
+    navigate("/");
+  };
+
+  const loginMutation = useLoginMutation(login, onSuccess);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

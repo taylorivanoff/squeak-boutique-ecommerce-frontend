@@ -1,25 +1,16 @@
-import React from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import SupplierProductForm from "./SupplierProductForm";
 import API from "../../api/apiClient";
 import { Link } from "react-router-dom";
+import useDeleteProductMutation from "../../hooks/useDeleteProductMutation";
 
 const SupplierProductList = () => {
-  const queryClient = useQueryClient();
-
   const { data: products = [], refetch } = useQuery({
     queryKey: ["supplierProducts"],
     queryFn: () => API.get("/supplier/products").then((res) => res.data.data),
   });
 
-  const deleteMutation = useMutation({
-    mutationFn: (id) => API.delete(`/supplier/products/${id}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-
-      refetch();
-    },
-  });
+  const deleteMutation = useDeleteProductMutation(refetch);
 
   return (
     <div>

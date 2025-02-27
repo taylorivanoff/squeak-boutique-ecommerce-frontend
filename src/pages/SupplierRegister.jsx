@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import API from "../api/apiClient";
 import { useAuth } from "../context/AuthContext";
+import useRegisterMutation from "../hooks/useRegisterMutation";
 
 const SupplierRegister = () => {
+  const navigate = useNavigate();
   const { login } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -14,17 +14,11 @@ const SupplierRegister = () => {
     role: "supplier",
   });
 
-  const navigate = useNavigate();
+  const onSuccess = () => {
+    navigate("/");
+  };
 
-  const registerMutation = useMutation({
-    mutationFn: async (data) => {
-      const response = await API.post("/register", data);
-      login(response.data.data.token, response.data.data.user.role);
-    },
-    onSuccess: () => {
-      navigate("/");
-    },
-  });
+  const registerMutation = useRegisterMutation(login, onSuccess);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,7 +40,6 @@ const SupplierRegister = () => {
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="name">Company Name</label>
-
           <input
             type="text"
             name="name"
@@ -57,7 +50,6 @@ const SupplierRegister = () => {
         </p>
         <p>
           <label htmlFor="email">Email</label>
-
           <input
             type="email"
             name="email"
@@ -68,7 +60,6 @@ const SupplierRegister = () => {
         </p>
         <p>
           <label htmlFor="password">Password</label>
-
           <input
             type="password"
             name="password"
@@ -78,8 +69,8 @@ const SupplierRegister = () => {
           />
         </p>
 
-        <button type="submit" disabled={registerMutation.isPending}>
-          {registerMutation.isPending ? "Registering..." : "Register"}
+        <button type="submit" disabled={registerMutation.isLoading}>
+          {registerMutation.isLoading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>

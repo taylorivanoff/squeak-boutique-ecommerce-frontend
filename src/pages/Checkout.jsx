@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import API from "../api/apiClient";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useCheckoutMutation from "../hooks/useCheckoutMutation";
 
 const Checkout = () => {
-  const queryClient = useQueryClient();
   const { cart } = useCart();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -13,26 +11,7 @@ const Checkout = () => {
     paymentMethod: "credit_card",
   });
 
-  const checkout = async () => {
-    const orderData = {
-      address: formData.address,
-      payment_method: formData.paymentMethod,
-      items: cart.map((item) => ({
-        product_id: item.id,
-        quantity: item.quantity,
-        price: item.price,
-      })),
-    };
-    const response = await API.post("/checkout", orderData);
-    return response.data.data;
-  };
-
-  const checkoutMutation = useMutation({
-    mutationFn: checkout,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-  });
+  const { checkoutMutation } = useCheckoutMutation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +19,7 @@ const Checkout = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    checkoutMutation.mutate();
+    checkoutMutation.mutate({ formData, cart });
     navigate("/order-success");
   };
 

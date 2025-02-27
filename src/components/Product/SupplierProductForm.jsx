@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import API from "../../api/apiClient";
 import { useNavigate } from "react-router-dom";
+import useProductMutation from "../../hooks/useProductMutation";
 
 const SupplierProductForm = ({ product, onSuccess }) => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
     name: product ? product.name : "",
@@ -14,29 +12,13 @@ const SupplierProductForm = ({ product, onSuccess }) => {
     image: null,
   });
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      if (product) {
-        return await API.post(`/supplier/products/${product.id}`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      } else {
-        return await API.post("/supplier/products", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["supplierProducts"] });
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-
-      setFormData({
-        name: product ? formData.name : product.name,
-        price: product ? formData.price : product.price,
-        description: product ? formData.description : product.description,
-        image: null,
-      });
-    },
+  const mutation = useProductMutation(product, () => {
+    setFormData({
+      name: product ? formData.name : product.name,
+      price: product ? formData.price : product.price,
+      description: product ? formData.description : product.description,
+      image: null,
+    });
   });
 
   const handleChange = (e) => {

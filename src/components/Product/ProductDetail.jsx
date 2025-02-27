@@ -9,7 +9,6 @@ const ProductDetail = () => {
   const { addToCart } = useCart();
   const { token, role } = useAuth();
 
-  // Get product from ProductContext
   const product = products?.find((p) => p.id.toString() === id);
 
   if (isPending) return <p>Loading product...</p>;
